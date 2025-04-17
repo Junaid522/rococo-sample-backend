@@ -4,6 +4,7 @@ from rococo.data.postgresql import PostgreSQLAdapter
 from rococo.messaging.rabbitmq import RabbitMqConnection
 from typing import Optional
 from common.app_logger import logger
+from common.repositories.todo import TodoRepository
 
 
 def get_flask_pooled_db():
@@ -62,6 +63,8 @@ class RepoType(Enum):
     EMAIL = auto()
     LOGIN_METHOD = auto()
     PERSON_ORGANIZATION_ROLE = auto()
+    TODO = auto()
+
 
 
 class RepositoryFactory:
@@ -74,7 +77,8 @@ class RepositoryFactory:
         RepoType.ORGANIZATION: OrganizationRepository,
         RepoType.EMAIL: EmailRepository,
         RepoType.LOGIN_METHOD: LoginMethodRepository,
-        RepoType.PERSON_ORGANIZATION_ROLE: PersonOrganizationRoleRepository
+        RepoType.PERSON_ORGANIZATION_ROLE: PersonOrganizationRoleRepository,
+        RepoType.TODO: TodoRepository
     }
 
     def get_db_connection(self):
